@@ -21,10 +21,16 @@ export default {
     simple: { control: "boolean" },
     stepNumber: { control: "number" },
     stepCount: { control: "number" },
+    enableFirst: {
+      control: "boolean",
+    },
     enableBack: {
       control: "boolean",
     },
     enableForward: {
+      control: "boolean",
+    },
+    enableLast: {
       control: "boolean",
     },
     onBack: {
@@ -50,8 +56,10 @@ SimpleStep.args = {
   description: "Retire do forno e coloque sobre a grade de resfriamento",
   stepNumber: 1,
   stepCount: 3,
+  enableFirst: false,
   enableBack: false,
   enableForward: true,
+  enableLast: true,
 };
 
 export const ImageStep = RecipeStepTemplate.bind({});
@@ -61,8 +69,10 @@ ImageStep.args = {
   image: "https://media.giphy.com/media/6N4nyvDBFRql3tbDf3/giphy.gif",
   stepNumber: 2,
   stepCount: 3,
+  enableFirst: true,
   enableBack: true,
   enableForward: true,
+  enableLast: true,
 };
 
 export const TimerStep = RecipeStepTemplate.bind({});
@@ -75,6 +85,8 @@ TimerStep.args = {
   simple: false,
   stepNumber: 5,
   stepCount: 10,
+  enableFirst: true,
   enableBack: true,
-  enableForward: true,
+  enableForward: false,
+  enableLast: false,
 };

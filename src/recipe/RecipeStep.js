@@ -1,15 +1,23 @@
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import Slide from "@mui/material/Slide";
+import FirstPageIcon from "@mui/icons-material/FirstPage";
+import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
+import NavigateNextIcon from "@mui/icons-material/NavigateNext";
+import LastPageIcon from "@mui/icons-material/LastPage";
 import {
+  AppBar,
   Button,
-  Card,
-  CardActions,
-  CardContent,
+  ButtonGroup,
   CardMedia,
+  Dialog,
+  DialogActions,
+  DialogContent,
   Grid,
+  Toolbar,
   Typography,
 } from "@mui/material";
 import { Timer } from "../timer/Timer";
+import useScrollTrigger from "@mui/material/useScrollTrigger";
+import { useState } from "react";
 
 export function RecipeStep({
   title,
@@ -20,50 +28,74 @@ export function RecipeStep({
   simple = true,
   stepNumber = 1,
   stepCount = 1,
-  enableBack = true,
-  enableForward = true,
+  enableFirst = false,
+  enableBack = false,
+  enableForward = false,
+  enableLast = false,
+  onFirst = () => {},
   onBack,
   onForward,
+  onLast = () => {},
 }) {
   return (
-    <Card>
-      {image && <CardMedia component="img" height="140" image={image} />}
-      <CardContent>
+    <Dialog fullScreen open={true}>
+      <AppBar>
+        <Toolbar>
+          <Typography variant="h6" component="div">
+            beginner.recipes
+          </Typography>
+        </Toolbar>
+      </AppBar>
+      <Toolbar />
+      <DialogContent>
+        {image && <CardMedia component="img" height="140" image={image} />}
         <Typography variant="h5" component="div">
           {title}
         </Typography>
         <Typography variant="body2" color="text.secondary">
           {description}
         </Typography>
-      </CardContent>
-      {totalTime != null && (
-        <CardContent>
+        {totalTime != null && (
           <Timer
             remainingTime={remainingTime}
             totalTime={totalTime}
             simple={simple}
           />
-        </CardContent>
-      )}
-      <CardActions>
+        )}
+      </DialogContent>
+      <DialogActions>
         <Grid container justifyContent="space-around">
           <Grid item>
-            <Button size="small" disabled={!enableBack} onClick={onBack}>
-              <ArrowBackIcon />
-            </Button>
+            <ButtonGroup variant="text">
+              <Button size="small" disabled={!enableFirst} onClick={onFirst}>
+                <FirstPageIcon />
+              </Button>
+              <Button size="small" disabled={!enableBack} onClick={onBack}>
+                <NavigateBeforeIcon />
+              </Button>
+            </ButtonGroup>
           </Grid>
           <Grid item>
-            <Typography>
+            <Typography size="small">
               {stepNumber}/{stepCount}
             </Typography>
           </Grid>
           <Grid item>
-            <Button size="small" disabled={!enableForward} onClick={onForward}>
-              <ArrowForwardIcon />
-            </Button>
+            <ButtonGroup variant="text">
+              <Button
+                size="small"
+                disabled={!enableForward}
+                onClick={onForward}
+              >
+                <NavigateNextIcon />
+              </Button>
+              <Button size="small" disabled={!enableLast} onClick={onLast}>
+                <LastPageIcon />
+              </Button>
+            </ButtonGroup>
           </Grid>
         </Grid>
-      </CardActions>
-    </Card>
+      </DialogActions>
+    </Dialog>
   );
 }
