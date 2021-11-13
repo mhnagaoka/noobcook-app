@@ -67,29 +67,29 @@ export function RecipeStep({
         <Grid container justifyContent="space-around">
           <Grid item>
             <ButtonGroup variant="text">
-              <Button size="small" disabled={!enableFirst} onClick={onFirst}>
+              <Button size="large" disabled={!enableFirst} onClick={onFirst}>
                 <FirstPageIcon />
               </Button>
-              <Button size="small" disabled={!enableBack} onClick={onBack}>
+              <Button size="large" disabled={!enableBack} onClick={onBack}>
                 <NavigateBeforeIcon />
               </Button>
             </ButtonGroup>
           </Grid>
           <Grid item>
-            <Typography size="small">
+            <Typography>
               {stepNumber}/{stepCount}
             </Typography>
           </Grid>
           <Grid item>
             <ButtonGroup variant="text">
               <Button
-                size="small"
+                size="large"
                 disabled={!enableForward}
                 onClick={onForward}
               >
                 <NavigateNextIcon />
               </Button>
-              <Button size="small" disabled={!enableLast} onClick={onLast}>
+              <Button size="large" disabled={!enableLast} onClick={onLast}>
                 <LastPageIcon />
               </Button>
             </ButtonGroup>
