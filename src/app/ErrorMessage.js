@@ -9,7 +9,7 @@ export function ErrorMessage() {
         image="https://media.giphy.com/media/fAaBpMgGuyf96/giphy.gif"
       />
       <CardContent>
-        <Typography gutterBotton variant="h5" component="div">
+        <Typography variant="h5" component="div">
           Ops!
         </Typography>
         <Typography variant="body2" color="text.secondary">

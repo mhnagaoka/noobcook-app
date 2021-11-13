@@ -29,7 +29,7 @@ export function RecipeStep({
     <Card>
       {image && <CardMedia component="img" height="140" image={image} />}
       <CardContent>
-        <Typography gutterBotton variant="h5" component="div">
+        <Typography variant="h5" component="div">
           {title}
         </Typography>
         <Typography variant="body2" color="text.secondary">

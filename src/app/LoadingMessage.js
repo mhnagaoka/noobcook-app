@@ -9,7 +9,7 @@ export function LoadingMessage() {
         image="https://media.giphy.com/media/ieaUdBJJC19uw/giphy.gif"
       />
       <CardContent>
-        <Typography gutterBotton variant="h5" component="div">
+        <Typography variant="h5" component="div">
           Aguarde...
         </Typography>
         <Typography variant="body2" color="text.secondary">
