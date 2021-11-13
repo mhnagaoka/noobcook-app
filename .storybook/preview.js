@@ -16,4 +16,8 @@ export const parameters = {
       date: /Date$/,
     },
   },
-}
+  docs: {
+    inlineStories: false,
+    iframeHeight: "700px",
+  },
+};
