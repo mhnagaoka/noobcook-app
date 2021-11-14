@@ -13,7 +13,17 @@ import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import PauseIcon from "@mui/icons-material/Pause";
 
-export function Timer({ totalTime, remainingTime, running, simple = true }) {
+export function Timer({
+  totalTime,
+  remainingTime,
+  onPlusOne,
+  onMinusOne,
+  onReset,
+  onStart,
+  onPause,
+  running,
+  simple = true,
+}) {
   return (
     <Grid container justifyContent="center">
       <Grid item>
@@ -22,10 +32,10 @@ export function Timer({ totalTime, remainingTime, running, simple = true }) {
           aria-label="outlined primary button group"
           size="small"
         >
-          <Button>
+          <Button onClick={onMinusOne}>
             <RemoveIcon />
           </Button>
-          <Button>
+          <Button onClick={onPlusOne}>
             <AddIcon />
           </Button>
         </ButtonGroup>
@@ -42,7 +52,7 @@ export function Timer({ totalTime, remainingTime, running, simple = true }) {
               display: "flex",
               flexDirection: "column",
               justifyContent: "center",
-              height: 4
+              height: 4,
             }}
           >
             <Typography variant="h4">
@@ -69,10 +79,16 @@ export function Timer({ totalTime, remainingTime, running, simple = true }) {
           aria-label="outlined primary button group"
           size="small"
         >
-          <Button>
+          <Button onClick={onReset}>
             <SettingsBackupRestoreIcon />
           </Button>
-          <Button>{running ? <PauseIcon /> : <PlayArrowIcon />}</Button>
+          <Button>
+            {running ? (
+              <PauseIcon onClick={onPause} />
+            ) : (
+              <PlayArrowIcon onClick={onStart} />
+            )}
+          </Button>
         </ButtonGroup>
       </Grid>
     </Grid>

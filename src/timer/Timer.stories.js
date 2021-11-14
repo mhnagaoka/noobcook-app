@@ -4,10 +4,15 @@ export default {
   title: "timer/Timer",
   component: Timer,
   argTypes: {
-    remainingTime: "number",
-    totalTime: "number",
-    running: "boolean",
-    simple: "boolean",
+    remainingTime: { control: "number" },
+    totalTime: { control: "number" },
+    running: { control: "boolean" },
+    simple: { control: "boolean" },
+    onPlusOne: { action: "onPlusOne" },
+    onMinusOne: { action: "onMinusOne" },
+    onReset: { action: "onReset" },
+    onStart: { action: "onStart" },
+    onPause: { action: "onPause" },
   },
 };
 

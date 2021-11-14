@@ -33,11 +33,32 @@ export default {
     enableLast: {
       control: "boolean",
     },
+    onPlusOne: {
+      action: "onPlusOne",
+    },
+    onMinusOne: {
+      action: "onMinusOne",
+    },
+    onReset: {
+      action: "onReset",
+    },
+    onStart: {
+      action: "onStart",
+    },
+    onPause: {
+      action: "onPause",
+    },
+    onFirst: {
+      action: "onFirst",
+    },
     onBack: {
       action: "onBack",
     },
     onForward: {
       action: "onForward",
+    },
+    onLast: {
+      action: "onLast",
     },
   },
 };
