@@ -43,7 +43,7 @@ BreadRecipe.args = {
       title: "Passo 5",
       description: "Aguarde 15 minutos.",
       image: "",
-      totalTime: "900000",
+      totalTime: "15",
     },
     {
       title: "Passo 6",
@@ -54,14 +54,14 @@ BreadRecipe.args = {
       title: "Passo 7",
       description: "Sove por 10 minutos.",
       image: "",
-      totalTime: "600000",
+      totalTime: "10",
     },
     {
       title: "Passo 8",
       description:
         "Coloque a massa num recipiente tampado e aguarde até dobrar de tamanho (a 24°C demora cerca de 1 hora).",
       image: "https://media.giphy.com/media/M6qXhksKxDfry/giphy.gif",
-      totalTime: "3600000",
+      totalTime: "60",
     },
     {
       title: "Passo 9",
@@ -71,7 +71,7 @@ BreadRecipe.args = {
       title: "Passo 10",
       description: "Aguarde 15 minutos.",
       image: "",
-      totalTime: "900000",
+      totalTime: "16",
     },
     {
       title: "Passo 11",
@@ -82,7 +82,7 @@ BreadRecipe.args = {
       description:
         "Aguarde até aumentar uns 50% (tipicamente 30 minutos a 24°C). Quando faltar uns 15 minutos, ligue o forno na temperatura máxima com a panela de ferro fundido dentro.",
       image: "",
-      totalTime: "1800000",
+      totalTime: "30",
     },
     {
       title: "Passo 13",
@@ -94,7 +94,7 @@ BreadRecipe.args = {
       title: "Passo 15",
       description: "Asse por 15 minutos.",
       image: "",
-      totalTime: "900000",
+      totalTime: "15",
     },
     { title: "Passo 16", description: "Destampe a panela mantendo-a no forno" },
     {
@@ -102,7 +102,7 @@ BreadRecipe.args = {
       description:
         "Asse por mais 20 minutos ou até dourar de acordo com sua preferência.",
       image: "",
-      totalTime: "1200000",
+      totalTime: "20",
     },
     {
       title: "Passo 18",
@@ -113,7 +113,7 @@ BreadRecipe.args = {
       title: "Passo 19",
       description: "Aguarde cerca de 1 ou 2 horas ou até resfriar.",
       image: "",
-      totalTime: "5400000",
+      totalTime: "90",
     },
     {
         title: "Passo 20",

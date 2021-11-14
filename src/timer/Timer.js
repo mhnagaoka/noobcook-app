@@ -12,8 +12,31 @@ import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import PauseIcon from "@mui/icons-material/Pause";
+import { useTimer } from "react-timer-hook";
+import { useState } from "react";
 
-export function Timer({ totalTime, remainingTime, running, simple = true }) {
+function format(value) {
+  return value < 10 ? `0${value}` : value;
+}
+
+export function Timer({ totalTime, simple = true }) {
+  const [totalSeconds, setTotalSeconds] = useState(totalTime * 60);
+  const {
+    seconds,
+    minutes,
+    hours,
+    days,
+    isRunning,
+    pause,
+    resume,
+    restart,
+  } = useTimer({
+    expiryTimestamp: Date.now() + totalSeconds * 1000,
+    autoStart: false,
+    onExpire: () => console.warn("onExpire called"),
+  });
+  const remainingTime = days * 86400 + hours * 3600 + minutes * 60 + seconds;
+  // console.log(`${days}d ${hours}h ${minutes}m ${seconds}s`);
   return (
     <Grid container justifyContent="center">
       <Grid item>
@@ -22,11 +45,79 @@ export function Timer({ totalTime, remainingTime, running, simple = true }) {
           aria-label="outlined primary button group"
           size="small"
         >
-          <Button>
-            <RemoveIcon />
+          <Button
+            onClick={() => {
+              const time = new Date();
+              const newRemainingTime = remainingTime - 3600;
+              time.setSeconds(time.getSeconds() + newRemainingTime);
+              setTotalSeconds(newRemainingTime);
+              restart(time, isRunning);
+            }}
+            disabled={
+              days === 0 && hours * 3600 + minutes * 60 + seconds < 3601
+            }
+          >
+            -60m
           </Button>
-          <Button>
-            <AddIcon />
+          <Button
+            onClick={() => {
+              const time = new Date();
+              const newRemainingTime = remainingTime - 600;
+              time.setSeconds(time.getSeconds() + newRemainingTime);
+              setTotalSeconds(newRemainingTime);
+              restart(time, isRunning);
+            }}
+            disabled={days * 24 + hours === 0 && minutes * 60 + seconds < 601}
+          >
+            -10m
+          </Button>
+          <Button
+            onClick={() => {
+              const time = new Date();
+              const newRemainingTime = remainingTime - 60;
+              time.setSeconds(time.getSeconds() + newRemainingTime);
+              setTotalSeconds(newRemainingTime);
+              restart(time, isRunning);
+            }}
+            disabled={days * 24 + hours === 0 && minutes * 60 + seconds < 61}
+          >
+            -1m
+          </Button>
+          <Button
+            onClick={() => {
+              const time = new Date();
+              const newRemainingTime = remainingTime + 60;
+              time.setSeconds(time.getSeconds() + newRemainingTime);
+              setTotalSeconds(newRemainingTime);
+              restart(time, isRunning);
+            }}
+            disabled={days * 24 + hours > 98 && minutes >= 59}
+          >
+            +1m
+          </Button>
+          <Button
+            onClick={() => {
+              const time = new Date();
+              const newRemainingTime = remainingTime + 600;
+              time.setSeconds(time.getSeconds() + newRemainingTime);
+              setTotalSeconds(newRemainingTime);
+              restart(time, isRunning);
+            }}
+            disabled={days * 24 + hours > 98 && minutes >= 50}
+          >
+            +10m
+          </Button>
+          <Button
+            onClick={() => {
+              const time = new Date();
+              const newRemainingTime = remainingTime + 3600;
+              time.setSeconds(time.getSeconds() + newRemainingTime);
+              setTotalSeconds(newRemainingTime);
+              restart(time, isRunning);
+            }}
+            disabled={days * 24 + hours > 98}
+          >
+            +60m
           </Button>
         </ButtonGroup>
       </Grid>
@@ -42,24 +133,32 @@ export function Timer({ totalTime, remainingTime, running, simple = true }) {
               display: "flex",
               flexDirection: "column",
               justifyContent: "center",
-              height: 4
+              height: 4,
             }}
           >
             <Typography variant="h4">
-              <Display millis={remainingTime} />
+              {days > 0 || hours > 0
+                ? `${format(days * 24 + hours)}:${format(minutes)}:${format(
+                    seconds
+                  )}`
+                : `${format(minutes)}:${format(seconds)}`}
             </Typography>
           </Box>
           <CircularProgress
             size={200}
             variant="determinate"
-            value={Math.min(100, (100 * remainingTime) / totalTime)}
+            value={Math.min(100, (remainingTime * 100) / totalSeconds)}
           />
         </Grid>
       )}
       {simple && (
         <Grid item xs={12}>
           <Typography variant="h3" align="center">
-            <Display millis={remainingTime} />
+            {days > 0 || hours > 0
+              ? `${format(days * 24 + hours)}:${format(minutes)}:${format(
+                  seconds
+                )}`
+              : `${format(minutes)}:${format(seconds)}`}
           </Typography>
         </Grid>
       )}
@@ -69,10 +168,25 @@ export function Timer({ totalTime, remainingTime, running, simple = true }) {
           aria-label="outlined primary button group"
           size="small"
         >
-          <Button>
+          <Button
+            onClick={() => {
+              const time = new Date();
+              time.setSeconds(time.getSeconds() + totalTime * 60);
+              setTotalSeconds(totalTime * 60);
+              restart(time, false);
+            }}
+          >
             <SettingsBackupRestoreIcon />
           </Button>
-          <Button>{running ? <PauseIcon /> : <PlayArrowIcon />}</Button>
+          {isRunning ? (
+            <Button onClick={pause} disabled={remainingTime <= 0}>
+              <PauseIcon />
+            </Button>
+          ) : (
+            <Button onClick={resume} disabled={remainingTime <= 0}>
+              <PlayArrowIcon />
+            </Button>
+          )}
         </ButtonGroup>
       </Grid>
     </Grid>
