@@ -1,52 +1,60 @@
-function CoreTimer() {
-  let elapsedTime = 0;
-  let startTime = 0;
-  let pauseTime = 0;
-  let paused = false;
-  let running = false;
-  const start = () => {
-    if (!running) {
-      const now = Date.now();
-      startTime = now;
-      running = true;
-      paused = false;
-    } else if (paused) {
-      const now = Date.now();
-      startTime = now;
-      elapsedTime += now - pauseTime;
-      paused = false;
-    }
-  };
-  const pause = () => {
-    if (running && !paused) {
-      pauseTime = Date.now();
-      paused = true;
-    }
-  };
-  const reset = () => {
-    elapsedTime = 0;
-    startTime = 0;
-    pauseTime = 0;
-    paused = false;
-    running = false;
-  };
-  const isRunning = () => running && !paused;
-  const getElapsedTime = () => {
-    if (running) {
-      if (paused) {
-        return elapsedTime + pauseTime - startTime;
-      }
-      return elapsedTime + Date.now() - startTime;
-    }
-    return elapsedTime;
-  };
+export function CoreTimer() {
   return {
-    start,
-    pause,
-    reset,
-    isRunning,
-    getElapsedTime,
+    elapsedTime: 0,
+    startTime: 0,
+    paused: false,
+    running: false,
   };
 }
 
-export default CoreTimer;
+export function start(coreTimer) {
+  if (!coreTimer.running) {
+    const now = Date.now();
+    return {
+      ...coreTimer,
+      startTime: now,
+      running: true,
+      paused: false,
+    };
+  } else if (coreTimer.paused) {
+    const now = Date.now();
+    return {
+      ...coreTimer,
+      startTime: now,
+      paused: false,
+    };
+  }
+  return coreTimer;
+}
+
+export function pause(coreTimer) {
+  if (coreTimer.running && !coreTimer.paused) {
+    return {
+      ...coreTimer,
+      elapsedTime: coreTimer.elapsedTime + Date.now() - coreTimer.startTime,
+      paused: true,
+    };
+  }
+  return coreTimer;
+}
+
+export function reset(coreTimer) {
+  return {
+    ...coreTimer,
+    elapsedTime: 0,
+    startTime: 0,
+    paused: false,
+    running: false,
+  };
+}
+
+export function isRunning(coreTimer) {
+  return coreTimer.running && !coreTimer.paused;
+}
+
+export function getElapsedTime(coreTimer) {
+  if (coreTimer.running && !coreTimer.paused) {
+    return coreTimer.elapsedTime + Date.now() - coreTimer.startTime;
+  }
+  return coreTimer.elapsedTime;
+}
