@@ -16,13 +16,13 @@ import PauseIcon from "@mui/icons-material/Pause";
 export function Timer({
   totalTime,
   remainingTime,
+  running,
+  simple = true,
   onPlusOne,
   onMinusOne,
   onReset,
   onStart,
   onPause,
-  running,
-  simple = true,
 }) {
   return (
     <Grid container justifyContent="center">

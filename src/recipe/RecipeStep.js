@@ -22,8 +22,9 @@ export function RecipeStep({
   title,
   description,
   image,
-  remainingTime,
   totalTime,
+  remainingTime,
+  running,
   simple = true,
   stepNumber = 1,
   stepCount = 1,
@@ -70,8 +71,9 @@ export function RecipeStep({
         </Typography>
         {totalTime != null && (
           <Timer
-            remainingTime={remainingTime}
             totalTime={totalTime}
+            remainingTime={remainingTime}
+            running={running}
             simple={simple}
             onPlusOne={onPlusOne}
             onMinusOne={onMinusOne}
