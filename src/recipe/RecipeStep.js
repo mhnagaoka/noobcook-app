@@ -1,8 +1,8 @@
-import Slide from "@mui/material/Slide";
 import FirstPageIcon from "@mui/icons-material/FirstPage";
+import GitHubIcon from "@mui/icons-material/GitHub";
+import LastPageIcon from "@mui/icons-material/LastPage";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
-import LastPageIcon from "@mui/icons-material/LastPage";
 import {
   AppBar,
   Button,
@@ -11,13 +11,11 @@ import {
   Dialog,
   DialogActions,
   DialogContent,
-  Grid,
+  Grid, Link,
   Toolbar,
-  Typography,
+  Typography
 } from "@mui/material";
 import { Timer } from "../timer/Timer";
-import useScrollTrigger from "@mui/material/useScrollTrigger";
-import { useState } from "react";
 
 export function RecipeStep({
   title,
@@ -41,9 +39,18 @@ export function RecipeStep({
     <Dialog fullScreen open={true}>
       <AppBar>
         <Toolbar>
-          <Typography variant="h6" component="div">
+          <Typography sx={{ flex: 1 }} variant="h6" component="div">
             beginner.recipes
           </Typography>
+          <Link
+            color="inherit"
+            component="a"
+            href="https://github.com/mhnagaoka/noobcook-app"
+            target="_blank"
+            rel="noopener"
+          >
+            <GitHubIcon />
+          </Link>
         </Toolbar>
       </AppBar>
       <Toolbar />
