@@ -11,9 +11,10 @@ import {
   Dialog,
   DialogActions,
   DialogContent,
-  Grid, Link,
+  Grid,
+  Link,
   Toolbar,
-  Typography
+  Typography,
 } from "@mui/material";
 import { Timer } from "../timer/Timer";
 
@@ -21,8 +22,9 @@ export function RecipeStep({
   title,
   description,
   image,
-  remainingTime,
   totalTime,
+  remainingTime,
+  running,
   simple = true,
   stepNumber = 1,
   stepCount = 1,
@@ -30,10 +32,15 @@ export function RecipeStep({
   enableBack = false,
   enableForward = false,
   enableLast = false,
-  onFirst = () => {},
+  onPlusOne,
+  onMinusOne,
+  onReset,
+  onStart,
+  onPause,
+  onFirst,
   onBack,
   onForward,
-  onLast = () => {},
+  onLast,
 }) {
   return (
     <Dialog fullScreen open={true}>
@@ -64,9 +71,15 @@ export function RecipeStep({
         </Typography>
         {totalTime != null && (
           <Timer
-            remainingTime={remainingTime}
             totalTime={totalTime}
+            remainingTime={remainingTime}
+            running={running}
             simple={simple}
+            onPlusOne={onPlusOne}
+            onMinusOne={onMinusOne}
+            onReset={onReset}
+            onStart={onStart}
+            onPause={onPause}
           />
         )}
       </DialogContent>
